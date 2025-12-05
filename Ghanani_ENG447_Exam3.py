@@ -10,7 +10,7 @@ print("5. After each guess, you will get:")
 print("     - Bulls: correct digit in the correct position")
 print("     - Cows:  correct digit but in the wrong position")
 print("6. Your goal is to find the secret number.")
-print("7. Also, entropy will be shown before and after each guess.")
+print("7. Also, entropy will be shown after each guess.")
 print("========================================\n")
 
 
@@ -120,3 +120,4 @@ def play():
 
 
 play()
+
