@@ -74,40 +74,6 @@ def entropy(cs):  # cs is candidate set
 def filter_candidates(cs, guess, b, c):
     return [s for s in cs if bulls_cows(s, guess) == (b, c)]
 
-def partition_by_feedback(cs, guess):
-    parts = {}
-    for s in cs:
-        r = bulls_cows(s, guess)
-        parts.setdefault(r, []).append(s)
-    return parts
-# How many different feedback results could possibly happen
-
-
-def expected_info_gain(cs, guess):
-    if not cs:
-        return 0.0
-    H = entropy(cs)
-    parts = partition_by_feedback(cs, guess)
-    total = len(cs)
-    exp_post = 0.0
-    for subset in parts.values():
-        p = len(subset) / total
-        exp_post += p * math.log2(len(subset))
-    return H - exp_post
-
-def best_guess(cs, search_space=None):
-    if not cs:
-        return None, 0.0
-    if search_space is None:
-        search_space = cs  
-    best_g, best_ig = None, -1.0
-    for g in search_space:
-        ig = expected_info_gain(cs, g)
-        if ig > best_ig:
-            best_g, best_ig = g, ig
-    return best_g, best_ig
-
-
 # Main game code 
 def play():    
     S = generate_candidates_simple()
@@ -151,5 +117,6 @@ def play():
             break
 
         turn += 1
+
 
 play()
