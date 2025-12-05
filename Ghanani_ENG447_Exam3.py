@@ -93,6 +93,8 @@ def play():
             print("Invalid: 4 digits, no repeats, no leading zero.\n")
             continue
 
+        H_before = entropy(S)
+
         # feedback
         b, c = bulls_cows(secret, guess)
         print(f"Result → Bulls: {b}, Cows: {c}")
@@ -101,7 +103,6 @@ def play():
         S = filter_candidates(S, guess, b, c)
 
         # show entropy before and after the guess
-        H_before = entropy(S)
         H_after = entropy(S)
         print(f"Entropy after this guess: {H_after:.3f} bits")
         print(f"Realized information gain: {H_before - H_after:.3f} bits\n")
@@ -111,7 +112,7 @@ def play():
             print(f"Correct! The secret was {secret}. You solved it in {turn} turns.")
             break
 
-        # safety edge case
+        # safety case
         if not S:
             print("No possible candidates remain. Check your rules.")
             break
@@ -120,4 +121,5 @@ def play():
 
 
 play()
+
 
